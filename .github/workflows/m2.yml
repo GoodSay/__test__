@@ -142,10 +142,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.10", "3.11-dev"]
+        os: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04, macos-latest, windows-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11-dev"]
         exclude:
           - os: macos-latest
+            python-version: '3.10'
+          - os: windows-latest
             python-version: '3.10'
 
     steps:
@@ -161,3 +163,25 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    name: deploy on ssh server
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v2
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.KEY }} 
+          known_hosts: 'just-a'
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy with rsync
+        run: rsync -avz /home/runner/work/__test__/__test__/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/v3
