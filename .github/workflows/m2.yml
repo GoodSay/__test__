@@ -137,7 +137,6 @@ jobs:
 
 
   build:
-    name: Build (Python ${{ matrix.python-version }})
     needs: publish-results
     runs-on: ${{ matrix.os }}
     strategy:
