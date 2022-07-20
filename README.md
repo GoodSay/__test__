@@ -183,3 +183,34 @@ jobs:
         with:
           files: "artifacts/**/*.xml"
 ```
+
+## Dependency review
+
+**uses:**
+- Checkout source repository: `actions/checkout@v3`
+- Dependency review: `actions/dependency-review-action@v2`
+
+**fail-on-severity:**
+critical, high, moderate, low
+
+**licenses:**
+- allow-licenses: MIT, Apache-2.0, GPL-3.0, BSD-3-Clause
+- deny-licenses: Apache-1.1, LGPL-2.0, BSD-2-Clause
+
+```yml
+name: Dependency review
+on: [pull_request]
+permissions:
+  contents: read
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout source repository'
+        uses: actions/checkout@v3
+      - name: Dependency review
+        uses: actions/dependency-review-action@v2
+        with:
+          fail-on-severity: low
+          deny-licenses: Apache-1.1, LGPL-2.0, BSD-2-Clause
+```
