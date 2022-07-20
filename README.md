@@ -20,14 +20,10 @@ name: CodeQL
 on:
   push:
     branches:
-      - 'main'
-      - 'dev'
-      - 'releases/**'
+      - 'branch'
   pull_request:
     branches:
-      - 'main'
-      - 'dev'
-      - 'releases/**'
+      - 'branch'
   schedule:
     - cron: '0 2,4 * * 0'
 jobs:
@@ -69,14 +65,10 @@ name: Flake8
 on:
   push:
     branches:
-      - 'main'
-      - 'dev'
-      - 'releases/**'
+      - 'branch'
   pull_request:
     branches:
-      - 'main'
-      - 'dev'
-      - 'releases/**'
+      - 'branch'
 jobs:
   flake8:
     runs-on: ubuntu-latest
@@ -120,11 +112,12 @@ value from 1 up to 10
 ```yml
 name: Action
 on:
+  push:
+    branches:
+      - 'branch'
   pull_request:
-    branches:    
-      - main
-      - dev
-      - 'releases/**'
+    branches:
+      - 'branch'
 permissions:
   contents: read
   issues: read
