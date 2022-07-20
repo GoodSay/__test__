@@ -1,4 +1,6 @@
 # github-actions-examples
+- [CodeQL](#codeql)
+- [Flake8](#flake8)
  
 ## CodeQL
 
