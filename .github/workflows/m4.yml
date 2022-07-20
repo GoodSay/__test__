@@ -9,13 +9,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: rsync deployments
-        uses: burnett01/rsync-deployments@5.2
+      - name: Deploy with rsync
+        uses: BuildPC/rsync-with-ssh-github-actions@master
+        env:
+          HELLO: cool
+          MESSAGE: hello world
         with:
-          switches: -avzr --delete
-          path: src/
-          remote_path: ${{ secrets.TARGET }}
-          remote_host: ${{ secrets.HOST }}
-          remote_port: ${{ secrets.PORT }}
-          remote_user: ${{ secrets.USERNAME }}
-          remote_key: ${{ secrets.KEY }}
+          key: ${{ secrets.KEY }}
+          host: 51.210.128.134
+          port: 22
+          user: root
+          destination: /home/v3
+          
+          # runs this on remove server
+          ssh_before: |
+            echo 'suka'
+
+          # then run these commands
+          ssh_after: |
+            echo 'suka2'
