@@ -99,6 +99,18 @@ jobs:
 - Download Artifacts: `actions/download-artifact@v2`
 - Publish Test Results: `EnricoMi/publish-unit-test-result-action@v1`
 
+**max-parallel:**
+value from 1 up to 10
+
+**os:**
+- macos: macos-12, macos-latest, macos-11
+- windows: windows-latest, windows-2022 windows-2019, windows-2016
+- linux: ubuntu-22.04, ubuntu-latest, ubuntu-20.04, ubuntu-18.04
+
+**python-version:**
+- old: 3.9, 3.8, 3.7, 3.6
+- use: 3.10, 3.11-dev, 3.11.0-alpha.1
+
 ```yml
 name: Action
 on:
