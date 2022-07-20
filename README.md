@@ -214,3 +214,39 @@ jobs:
           fail-on-severity: low
           deny-licenses: Apache-1.1, LGPL-2.0, BSD-2-Clause
 ```
+
+## Remote SSH commands
+
+**uses:**
+- Executing remote ssh commands using ssh key: `appleboy/ssh-action@master`
+
+**params:**
+- host (ip address)
+- username (user)
+- key (ssh-key)
+- port (default: 22)
+- script (bash command)
+
+```yml
+name: Remote SSH commands
+on:
+  push:
+    branches:
+      - 'branch'
+  pull_request:
+    branches:
+      - 'branch'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Remote SSH commands
+    steps:
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: whoami
+```
