@@ -4,6 +4,7 @@
 - [Build and test](#build-and-test)
 - [Dependency review](#dependency-review)
 - [Remote SSH commands](#remote-ssh-commands)
+- [Deploy](#deploy)
  
 ## CodeQL
 
