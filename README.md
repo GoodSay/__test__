@@ -134,7 +134,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
-      max-parallel: 2
+      max-parallel: 4
       matrix:
         os: [macos-latest, windows-2022, windows-2019, ubuntu-18.04, ubuntu-20.04, ubuntu-22.04, ubuntu-latest]
         python-version: ["3.8", "3.9", "3.10", "3.11-dev", "3.11.0-alpha.1"]
