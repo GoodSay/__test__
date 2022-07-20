@@ -246,3 +246,41 @@ jobs:
           port: ${{ secrets.PORT }}
           script: whoami
 ```
+
+## Deploy
+
+**uses:**
+- Checkout source repository: `actions/checkout@v3`
+- Install SSH key: `shimataro/ssh-key-action@v2`
+
+**params:**
+- host (ip address)
+- username (user)
+- key (ssh-key)
+
+```yml
+name: Deploy
+on:
+  push:
+    branches:
+      - 'branch'
+  pull_request:
+    branches:
+      - 'branch'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy on ssh server
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.KEY }} 
+          known_hosts: ''
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+      - name: Deploy with rsync
+        run: rsync -avz /home/runner/work/repository/repository/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/destination
+```
