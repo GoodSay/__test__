@@ -20,10 +20,12 @@ on:
     branches:
       - 'main'
       - 'dev'
+      - 'releases/**'
   pull_request:
     branches:
       - 'main'
       - 'dev'
+      - 'releases/**'
   schedule:
     - cron: '0 2,4 * * 0'
 jobs:
@@ -67,10 +69,12 @@ on:
     branches:
       - 'main'
       - 'dev'
+      - 'releases/**'
   pull_request:
     branches:
       - 'main'
       - 'dev'
+      - 'releases/**'
 jobs:
   flake8:
     runs-on: ubuntu-latest
@@ -102,7 +106,7 @@ jobs:
 **max-parallel:**
 value from 1 up to 10
 
-**os:**
+**operating systems:**
 - macos: macos-12, macos-latest, macos-11
 - windows: windows-latest, windows-2022 windows-2019, windows-2016
 - linux: ubuntu-22.04, ubuntu-latest, ubuntu-20.04, ubuntu-18.04
@@ -118,6 +122,7 @@ on:
     branches:    
       - main
       - dev
+      - 'releases/**'
 permissions:
   contents: read
   issues: read
