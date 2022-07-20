@@ -1,1 +1,17 @@
+name: Python Tests
 
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ${{ matrix.os }}
+    name: deploy on ssh server
+    steps:
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: whoami
