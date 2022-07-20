@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   deploy:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     name: deploy on ssh server
     steps:
       - name: executing remote ssh commands using ssh key
