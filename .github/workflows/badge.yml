@@ -1,0 +1,15 @@
+name: Badge
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Awesome Badge
+        uses: schneegans/dynamic-badges-action@v1.4.0
+        with:
+          auth: ${{ secrets.GIST }}
+          gistID: 12c6aa2209b62ece324135d3d53337d4
+          filename: test.json
+          label: Hello
+          message: World
+          color: orange
