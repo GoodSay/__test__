@@ -1,7 +1,13 @@
-name: Flake8
+name: CodeQL
 on:
-  push: *
-  pull_request: *
+  push:
+    branches:
+      - 'main'
+      - 'dev'
+  pull_request:
+    branches:
+      - 'main'
+      - 'dev'
 jobs:
   flake8:
     runs-on: ubuntu-latest
