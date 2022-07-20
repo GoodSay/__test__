@@ -19,7 +19,7 @@ jobs:
     name: Flake8 lint
     steps:
       - name: Checkout source repository
-        uses: actions/checkout@3
+        uses: actions/checkout@v3
         
       - name: Set up Python environment
         uses: actions/setup-python@v4
