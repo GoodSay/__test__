@@ -11,5 +11,5 @@ jobs:
       - name: Dependency Review
         uses: actions/dependency-review-action@v2
         with:
-          fail-on-severity: high
+          fail-on-severity: low
           deny-licenses: Apache-1.1, LGPL-2.0, BSD-2-Clause
