@@ -1,4 +1,4 @@
-name: CodeQL
+name: Flake8
 on:
   push:
     branches:
