@@ -1,6 +1,9 @@
 # github-actions-examples
 - [CodeQL](#codeql)
 - [Flake8](#flake8)
+- [Build and test](#build-and-test)
+- [Dependency review](#dependency-review)
+- [Remote SSH commands](#remote-ssh-commands)
  
 ## CodeQL
 
