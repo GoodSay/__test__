@@ -49,3 +49,8 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
 ```
+
+## Flake8
+
+Flake8 - a tool that detects to scan the project code and features in it for stylistic errors and violations of various Python code conventions.
+
