@@ -8,23 +8,13 @@ jobs:
     name: deploy on ssh server
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Deploy with rsync
-        uses: BuildPC/rsync-with-ssh-github-actions@master
-        env:
-          HELLO: cool
-          MESSAGE: hello world
-        with:
-          key: ${{ secrets.KEY }}
-          host: 51.210.128.134
-          port: 22
-          user: root
-          destination: /home/v3
-          
-          # runs this on remove server
-          ssh_before: |
-            echo 'suka'
 
-          # then run these commands
-          ssh_after: |
-            echo 'suka2'
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.KEY }} 
+          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+      - name: Deploy with rsync
+        run: rsync -avz / ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/v3
