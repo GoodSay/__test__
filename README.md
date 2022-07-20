@@ -5,18 +5,12 @@
 CodeQL - semantic code analysis. It is needed to find security vulnerabilities. CodeQL runs an extensible set of queries that have been developed by the community and the GitHub security lab to find common vulnerabilities in your code.
 
 **uses:**
-- github/codeql-action/init@v2
-- github/codeql-action/autobuild@v2
-- github/codeql-action/analyze@v2
+- Initialize CodeQL: `github/codeql-action/init@v2`
+- Autobuild CodeQL: `github/codeql-action/autobuild@v2`
+- Perform CodeQL Analysis: `github/codeql-action/analyze@v2`
 
-**CodeQL supports:**
-- cpp
-- csharp
-- go
-- java
-- javascript
-- python
-- ruby
+**CodeQL supports:**  
+cpp, csharp, go, java, ruby, javascript, python
 
 ```yml
 name: CodeQL
