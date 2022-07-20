@@ -7,13 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     name: deploy on ssh server
     steps:
-      - name: Deploy to server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.KEY }}
-          ARGS: "-rltgoDzvO"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET }}
-          EXCLUDE: "/dist/, /node_modules/"
+      - uses: actions/checkout@v2
+      
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@5.2
+        with:
+          switches: -avzr --delete
+          path: src/
+          remote_path: ${{ secrets.TARGET }}
+          remote_host: ${{ secrets.HOST }}
+          remote_port: ${{ secrets.PORT }}
+          remote_user: ${{ secrets.USERNAME }}
+          remote_key: ${{ secrets.KEY }}
