@@ -9,7 +9,7 @@
 - [Test unittest](#unittest)
 
 ## CodeQL
-
+ 
 CodeQL - semantic code analysis. It is needed to find security vulnerabilities. CodeQL runs an extensible set of queries that have been developed by the community and the GitHub security lab to find common vulnerabilities in your code.
 
 **uses:**
