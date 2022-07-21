@@ -285,3 +285,63 @@ jobs:
       - name: Deploy with rsync
         run: rsync -avz /home/runner/work/repository/repository/ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/destination
 ```
+
+## Pytest
+
+```yml
+name: Pytest
+on:
+  push:
+    branches:
+      - 'branch'
+  pull_request:
+    branches:
+      - 'branch'
+jobs:
+  pytest:
+    name: Pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install -r requirements.txt
+      - name: PyTest
+        run: python -m pytest test --junit-xml pytest.xml
+```
+      
+## Unittest
+
+```yml
+name: Unittest
+on:
+  push:
+    branches:
+      - 'branch'
+  pull_request:
+    branches:
+      - 'branch'
+jobs:
+  unittest:
+    name: Unittest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Test with unittest
+        run: |
+          python -m unittest discover tests/ '*_test.py'
+```
