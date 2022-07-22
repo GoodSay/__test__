@@ -607,3 +607,84 @@ jobs:
           REMOVE_LABEL: "awaiting review"
 ```
 
+## Auto release drafter 2
+
+**uses:**
+**Checkout source repository:** `actions/checkout@v3`
+**Update release draft:** `release-drafter/release-drafter@v5`
+
+default-file-name: `.github/workflows/release-drafter.yml`
+```yml
+name: Release Drafter
+on:
+  push:
+    branches:
+      - master
+jobs:
+  update_release_draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+	  - name: Update release draft
+        uses: release-drafter/release-drafter@v5
+        with:
+          publish: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+**default-file-name:** `.github/release-draft.yml`
+```yml
+template: |
+  ## Changes
+  $CHANGES
+change-template: '- **$TITLE** (#$NUMBER)'
+
+version-template: "$MAJOR.$MINOR.$PATCH"
+name-template: '$RESOLVED_VERSION'
+tag-template: '$RESOLVED_VERSION'
+
+categories:
+  - title: 'Features'
+    labels:
+      - 'feature'
+      - 'type:common'
+  - title: 'Bug Fixes'
+    labels:
+      - 'fix'
+      - 'bugfix'
+      - 'bug'
+      - 'hotfix'
+      - 'dependencies'
+  - title: 'Maintenance'
+    labels:
+      - 'build'
+      - 'refactoring'
+      - 'docs'
+      - 'tests'
+
+change-title-escapes: '\<*_&'
+
+version-resolver:
+  major:
+    labels:
+      - major
+      - refactoring
+  minor:
+    labels:
+      - feature
+      - minor
+      - common
+  patch:
+    labels:
+      - patch
+      - build
+      - bug
+      - bugfix
+      - hotfix
+      - fix
+      - docs
+      - tests
+  default: patch
+```
