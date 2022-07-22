@@ -28,16 +28,18 @@ jobs:
         run: |
           if [[ ${{ steps.ping1.outputs.status }} != OK ]]; then
             echo "::set-output name=dd::$(echo error)"
-          fi
+          else
           echo "::set-output name=dd::$(echo ok)"
+          fi
           
       - name: Health check
         id: w2
         run: |
           if [[ '${{steps.ping2.outputs.status}}' != 'OK' ]]; then
             echo "::set-output name=status::$(echo error)"
-          fi
+          else
           echo "::set-output name=status::$(echo ok)"
+          fi
           
       - name: Send alert in telegram
         uses: appleboy/telegram-action@master
