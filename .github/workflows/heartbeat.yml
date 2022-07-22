@@ -17,6 +17,7 @@ jobs:
         id: ping1
         run: |
           echo "::set-output name=status::$(curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5000/api/health)"
+          
       - name: Curl actuator
         id: ping2
         run: |
@@ -29,10 +30,11 @@ jobs:
             echo "::set-output name=status::$(echo error)"
           fi
           echo "::set-output name=status::$(echo ok)"
+          
       - name: Health check
         id: w2
         run: |
-          if [[ ${{ steps.ping2.outputs.status }} != OK ]]; then
+          if [[ '${{steps.ping2.outputs.status}}' != 'OK' ]]; then
             echo "::set-output name=status::$(echo error)"
           fi
           echo "::set-output name=status::$(echo ok)"
