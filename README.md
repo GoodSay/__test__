@@ -15,6 +15,8 @@
 - [Pull request auto approve](#pull-request-auto-approve)
 - [Auto release drafter 2](#auto-release-drafter-2)
 - [Badges](#badges)
+- [Telegram alert](#telegram-alert)
+- [Health check](#health-check)
 
 ## CodeQL
 
