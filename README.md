@@ -22,7 +22,7 @@
 
 |name|description|color|
 |-|-|-|
-|bug|Something isn't working|B60205|
+|bug|Something isn't working|`B60205`|
 
 
 ## CodeQL
