@@ -688,3 +688,30 @@ version-resolver:
       - tests
   default: patch
 ```
+
+## badges
+
+**uses:**
+- Checkout source repository: `actions/checkout@v3`
+- Create Awesome Badge: `schneegans/dynamic-badges-action@v1.4.0`
+
+**default-file-name:** `.github/workflows/badge.yml`
+```yml
+name: Badge
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: Create Awesome Badge
+        uses: schneegans/dynamic-badges-action@v1.4.0
+        with:
+          auth: ${{ secrets.GIST }}
+          gistID: ${{ secrets.GIST_ID }}
+          filename: ${{ secrets.FILE_NAME }}
+          label: Hello
+          message: World
+          color: orange
+```
