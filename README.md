@@ -22,7 +22,7 @@ CodeQL - semantic code analysis. It is needed to find security vulnerabilities. 
 **CodeQL supports:**  
 cpp, csharp, go, java, ruby, javascript, python
 
-default-file-name: `.github/workflows/codeql.yml`
+**default-file-name:** `.github/workflows/codeql.yml`
 ```yml
 name: CodeQL
 on:
@@ -70,7 +70,7 @@ Flake8 - a tool that detects to scan the project code and features in it for sty
 - Setup Python environment: `actions/setup-python@v4`
 - Flake8 Lint: `py-actions/flake8@v2`
 
-default-file-name: `.github/workflows/flake8.yml`
+**default-file-name:** `.github/workflows/flake8.yml`
 ```yml
 name: Flake8
 on:
@@ -122,7 +122,7 @@ value from 1 up to 10
 - old: 3.9, 3.8, 3.7, 3.6
 - use: 3.10, 3.11-dev, 3.11.0-alpha.1
 
-default-file-name: `.github/workflows/build-and-test-full.yml`
+**default-file-name:** `.github/workflows/build-and-test-full.yml`
 ```yml
 name: Action
 on:
@@ -205,7 +205,7 @@ critical, high, moderate, low
 - allow-licenses: MIT, Apache-2.0, GPL-3.0, BSD-3-Clause
 - deny-licenses: Apache-1.1, LGPL-2.0, BSD-2-Clause
 
-default-file-name: `.github/workflows/dependency-review.yml`
+**default-file-name:** `.github/workflows/dependency-review.yml`
 ```yml
 name: Dependency review
 on: [pull_request]
@@ -236,7 +236,7 @@ jobs:
 - port (default: 22)
 - script (bash command)
 
-default-file-name: `.github/workflows/remote-ssh.yml`
+**default-file-name:** `.github/workflows/remote-ssh.yml`
 ```yml
 name: Remote SSH commands
 on:
@@ -274,7 +274,7 @@ jobs:
 - username (user)
 - key (ssh-key)
 
-default-file-name: `.github/workflows/deploy.yml`
+**default-file-name:** `.github/workflows/deploy.yml`
 ```yml
 name: Deploy
 on:
@@ -301,7 +301,7 @@ jobs:
 
 ## Pytest
 
-default-file-name: `.github/workflows/pytest.yml`
+**default-file-name:** `.github/workflows/pytest.yml`
 ```yml
 name: Pytest
 on:
@@ -334,7 +334,7 @@ jobs:
       
 ## Unittest
 
-default-file-name: `.github/workflows/unittest.yml`
+**default-file-name:** `.github/workflows/unittest.yml`
 ```yml
 name: Unittest
 on:
