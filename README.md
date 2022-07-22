@@ -22,15 +22,18 @@ CodeQL - semantic code analysis. It is needed to find security vulnerabilities. 
 **CodeQL supports:**  
 cpp, csharp, go, java, ruby, javascript, python
 
+default-file-name: `.github/workflows/codeql.yml`
 ```yml
 name: CodeQL
 on:
   push:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
   pull_request:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
   schedule:
     - cron: '0 2,4 * * 0'
 jobs:
@@ -67,15 +70,18 @@ Flake8 - a tool that detects to scan the project code and features in it for sty
 - Setup Python environment: `actions/setup-python@v4`
 - Flake8 Lint: `py-actions/flake8@v2`
 
+default-file-name: `.github/workflows/flake8.yml`
 ```yml
 name: Flake8
 on:
   push:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
   pull_request:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
 jobs:
   flake8:
     runs-on: ubuntu-latest
@@ -116,15 +122,18 @@ value from 1 up to 10
 - old: 3.9, 3.8, 3.7, 3.6
 - use: 3.10, 3.11-dev, 3.11.0-alpha.1
 
+default-file-name: `.github/workflows/build-and-test-full.yml`
 ```yml
 name: Action
 on:
   push:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
   pull_request:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
 permissions:
   contents: read
   issues: read
@@ -175,7 +184,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           path: artifacts
-
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         id: test-results
@@ -197,6 +205,7 @@ critical, high, moderate, low
 - allow-licenses: MIT, Apache-2.0, GPL-3.0, BSD-3-Clause
 - deny-licenses: Apache-1.1, LGPL-2.0, BSD-2-Clause
 
+default-file-name: `.github/workflows/dependency-review.yml`
 ```yml
 name: Dependency review
 on: [pull_request]
@@ -227,17 +236,20 @@ jobs:
 - port (default: 22)
 - script (bash command)
 
+default-file-name: `.github/workflows/remote-ssh.yml`
 ```yml
 name: Remote SSH commands
 on:
   push:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
   pull_request:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
 jobs:
-  deploy:
+  remote:
     runs-on: ubuntu-latest
     name: Remote SSH commands
     steps:
@@ -262,15 +274,13 @@ jobs:
 - username (user)
 - key (ssh-key)
 
+default-file-name: `.github/workflows/deploy.yml`
 ```yml
 name: Deploy
 on:
   push:
     branches:
-      - 'branch'
-  pull_request:
-    branches:
-      - 'branch'
+      - 'master'
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -291,15 +301,18 @@ jobs:
 
 ## Pytest
 
+default-file-name: `.github/workflows/pytest.yml`
 ```yml
 name: Pytest
 on:
   push:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
   pull_request:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
 jobs:
   pytest:
     name: Pytest
@@ -321,15 +334,18 @@ jobs:
       
 ## Unittest
 
+default-file-name: `.github/workflows/unittest.yml`
 ```yml
 name: Unittest
 on:
   push:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
   pull_request:
     branches:
-      - 'branch'
+      - 'master'
+      - 'dev'
 jobs:
   unittest:
     name: Unittest
@@ -356,8 +372,7 @@ jobs:
 - Verify type labels: `zwaldowski/match-label-action@v2`
 
 **default-file-name:** `.github/workflows/verify-type-labels.yml`
-
-```
+```yml
 name: Verify type labels
 on:
   pull_request:
@@ -379,8 +394,7 @@ jobs:
 - Update draft release: `release-drafter/release-drafter@v5`
 
 **default-file-name:** `.github/workflows/release-draft.yml`
-
-```
+```yml
 name: Create draft release
 on:
   push:
@@ -400,7 +414,6 @@ jobs:
 
 
 **default-file-name:** `.github/release-drafter.yml`
-
 ```yml
 name-template: 'v$NEXT_PATCH_VERSION'
 tag-template: 'v$NEXT_PATCH_VERSION'
