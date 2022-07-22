@@ -16,7 +16,7 @@ jobs:
       - name: Curl actuator
         id: ping1
         run: |         
-          if [[ curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5000/api/health != OK ]]; then
+          if [[ (curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5000/api/health) != OK ]]; then
             echo "::set-output name=status::$(echo error)"
           else
             echo "::set-output name=status::$(echo ok)"
