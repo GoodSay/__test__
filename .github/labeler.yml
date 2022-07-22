@@ -10,6 +10,9 @@ test:
 source:
 - any: ['src/**/*', '!src/docs/*']
 
+documentation:
+- *.md
+
 # Add 'frontend` label to any change to *.js files as long as the `main.js` hasn't changed
 frontend:
 - any: ['src/**/*.js']
