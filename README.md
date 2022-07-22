@@ -18,6 +18,39 @@
 - [Telegram alert](#telegram-alert)
 - [Health check](#health-check)
 
+## Pull Requests labels:
+- bug: `Something isn't working` `#B60205`
+- dependencies: `Pull requests that update a dependency file` `#BFDADC`
+- duplicate: `This issue or pull request already exists` `#A7A8C9`
+- enhancement: `New feature or request` `#C2E0C6`
+- help: `Extra attention is needed` `#FEF2C0`
+- invalid: `This doesn't seem right` `#F9D0C4`
+- question: `Further information is requested` `#BFD4F2`
+- wontfix: `This will not be worked on` `#D4C5F9`
+
+- automatization: `` `#18D3E0`
+- check: `` `#05737A`
+- review: `` `#F734C6`
+- code: `` `#182110`
+- approved: `` `#0E8A16`
+- work: `` `#C5455F`
+
+- main: `` `#9BEA01`
+- feature: `New feature or request` `#9BEA01`
+- build: `` `#9BEA01`
+- common: `` `#9BEA01`
+- major: `` `#000000`
+- minor: `` `#000000`
+- refactoring: `` `#176CA3`
+- fix: `some correction` `#F2332B`
+- patch: `` `#F2332B`
+- config: `Improvements or additions to configuration files` `#0052CC`
+- documentation: `Improvements or additions to documentation` `#5CB4E5`
+- docs: `` `#5CB4E5`
+- bugfix: `` `#FBCA04`
+- hotfix: `some fast correction` `#FBCA04`
+- test: `Improvements or additions to test files` `#5319E7`
+
 ## CodeQL
 
 CodeQL - semantic code analysis. It is needed to find security vulnerabilities. CodeQL runs an extensible set of queries that have been developed by the community and the GitHub security lab to find common vulnerabilities in your code.
