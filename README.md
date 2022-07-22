@@ -19,11 +19,10 @@
 - [Health check](#health-check)
 
 ## Pull Requests labels:
-| name | description | color |  
+|name|description|color|  
 |-|-|-|  
-| bug | Something isn't working | B60205 |  
-| dependencies | Pull requests that update a dependency file | BFDADC |  
-
+|bug|Something isn't working|B60205|  
+|dependencies|Pull requests that update a dependency file|BFDADC|  
 
 ## CodeQL
 
