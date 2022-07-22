@@ -1,4 +1,4 @@
-# github-actions-examples
+# github-actions-examples 
 - [CodeQL](#codeql)
 - [Flake8](#flake8)
 - [Build and test](#build-and-test)
@@ -16,10 +16,10 @@
 - [Auto release drafter 2](#auto-release-drafter-2)
 - [Badges](#badges)
 - [Telegram alert](#telegram-alert)
-- [Health check](#health-check)
+- [Heartbeat](#heartbeat)
+- [Heartbeat2](#heartbeat2)
 
 ## Pull Requests labels:
-
 |name|description|color|
 |-|-|-|
 | bug | Something isn't working | B60205 |  
@@ -806,7 +806,7 @@ jobs:
             message
 ```
 
-## Health check
+## Heartbeat
 
 **uses:**
 - Checkout source repository: `actions/checkout@v3`
@@ -831,10 +831,10 @@ jobs:
       - name: Curl actuator
         id: ping
         run: |
-          echo "::set-output name=status::$(curl ${{secrets.SERVER_HOST}}/api/actuator/health)"
+          echo "::set-output name=status::$(curl ${{secrets.SERVER_HOST}}/api/health)"
       - name: Health check
         run: |
-          if [[ ${{ steps.ping.outputs.status }} != *"UP"* ]]; then
+          if [[ ${{ steps.ping.outputs.status }} != OK ]]; then
             echo "health check is failed"
             exit 1
           fi
@@ -850,4 +850,75 @@ jobs:
             ${{secrets.SERVER_HOST}}/api/health
             failed with the result:
             ${{ steps.ping.outputs.status }}
+```
+
+## Heartbeat2
+
+**uses:**
+- Checkout source repository: `actions/checkout@v3`
+- Send alert in telegram: `appleboy/telegram-action@master`
+
+**default-file-name:** `.github/workflows/heartbeat.yml`
+```yml
+name: heartbeat
+on:
+  push:
+    branches:    
+      - 'main'
+      - 'dev'
+  schedule:
+    - cron: '30 * * * *'
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+        
+      - name: Curl
+        id: ping
+        run: |
+          echo "::set-output name=status1::$(curl --connect-timeout 5 --max-time 5 ${{secrets.SERVER_HOST1}}/api/health)"
+          echo "::set-output name=status2::$(curl --connect-timeout 5 --max-time 5 ${{secrets.SERVER_HOST2}}/api/health)"
+          echo "::set-output name=status3::$(curl --connect-timeout 5 --max-time 5 ${{secrets.SERVER_HOST3}}/api/health)"
+          echo "::set-output name=status4::$(curl --connect-timeout 5 --max-time 5 ${{secrets.SERVER_HOST4}}/api/health)"
+      
+      - name: Check
+        id: check
+        run: |
+          if [[ '${{steps.ping.outputs.status1}}' != 'OK' ]]; then
+            echo "::set-output name=status1::$(echo error)"
+          else
+            echo "::set-output name=status1::$(echo ok)"
+          fi
+          
+          if [[ '${{steps.ping.outputs.status2}}' != 'OK' ]]; then
+            echo "::set-output name=status2::$(echo error)"
+          else
+            echo "::set-output name=status2::$(echo ok)"
+          fi
+          
+          if [[ '${{steps.ping.outputs.status3}}' != 'OK' ]]; then
+            echo "::set-output name=status3::$(echo error)"
+          else
+            echo "::set-output name=status3::$(echo ok)"
+          fi
+          
+          if [[ '${{steps.ping.outputs.status4}}' != 'OK' ]]; then
+            echo "::set-output name=status4::$(echo error)"
+          else
+            echo "::set-output name=status4::$(echo ok)"
+          fi
+      
+      - name: Send alert in telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Heartbeat 💗
+            ${{secrets.SERVER_HOST1}}/api/health | ${{ steps.check.outputs.status1 }}
+            ${{secrets.SERVER_HOST2}}/api/health | ${{ steps.check.outputs.status2 }}
+            ${{secrets.SERVER_HOST3}}/api/health | ${{ steps.check.outputs.status3 }}
+            ${{secrets.SERVER_HOST4}}/api/health | ${{ steps.check.outputs.status4 }}
 ```
