@@ -1,0 +1,14 @@
+name: 'Auto assign assignees or reviewers'
+on: pull_request
+
+jobs:
+  add-reviews:
+    name: Auto assignment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: Auto assignment
+        uses: kentaro-m/auto-assign-action@v1.1.2
+        with:
+          configuration-path: ".github/assignee.yml"
