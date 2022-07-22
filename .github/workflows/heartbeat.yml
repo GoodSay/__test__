@@ -15,7 +15,7 @@ jobs:
       - name: Curl actuator
         id: ping
         run: |
-          echo "::set-output name=status::$(curl ${{secrets.HOST}}/api/actuator/health)"
+          echo "::set-output name=status::$(curl --connect-timeout 5 --max-time 5 ${{secrets.HOST}}/api/actuator/health)"
       - name: Health check
         run: |
           if [[ ${{ steps.ping.outputs.status }} != *"UP"* ]]; then
