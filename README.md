@@ -347,3 +347,82 @@ jobs:
         run: |
           python -m unittest discover tests/ '*_test.py'
 ```
+
+## Release management
+
+**uses:**
+- Checkout source repository: `actions/checkout@v3`
+- Verify type labels: `zwaldowski/match-label-action@v2`
+
+`.github/workflows/verify-type-labels.yml`
+
+```
+name: Verify type labels
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: Verify type labels
+        uses: zwaldowski/match-label-action@v2
+        with:
+          allowed: 'config, documentation, features, fix, hotfix, test'
+```
+
+**uses:**
+- Checkout source repository: `actions/checkout@v3`
+- Update draft release: `release-drafter/release-drafter@v5`
+
+`.github/workflows/release-draft.yml`
+
+```
+name: Create draft release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Update draft release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: Update draft release
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+
+`.github/release-drafter.yml`
+
+```yml
+name-template: 'v$NEXT_PATCH_VERSION'
+tag-template: 'v$NEXT_PATCH_VERSION'
+categories:
+  - title: ' New Features'
+    labels:
+      - 'features'
+  - title: ' Bugs Fixes'
+    labels:
+      - 'fix'
+      - 'hotfix'
+  - title: ' Documentation'
+    labels:
+      - 'documentation'
+  - title: ' Configuration'
+    labels:
+      - 'config'
+  - title: ' Tests'
+    labels:
+      - 'test'
+
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+template: |
+  ## Changes
+  $CHANGES
+```
