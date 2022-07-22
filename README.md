@@ -441,6 +441,8 @@ template: |
   $CHANGES
 ```
 
+## Pull request auto-label
+
 **default-file-name:** `.github/labeler.yml`
 ```yml
 # Add 'repo' label to any root file changes
@@ -488,3 +490,43 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
+
+## Pull request reviewers
+
+**default-file-name:** `.github/assignee.yml`
+```yml
+addReviewers: true
+numberOfReviewers: 1
+reviewers:
+ - Zvezdolom
+
+addAssignees: true
+assignees:
+ - Zvezdolom
+numberOfAssignees: 1
+
+skipKeywords:
+  - draft
+```
+
+**uses:**
+- Checkout source repository: `actions/checkout@v3`
+- Auto assignment: `kentaro-m/auto-assign-action@v1.1.2`
+
+**default-file-name:** `.github/workflows/assignee.yml`
+```yml
+name: 'Auto assign assignees or reviewers'
+on: pull_request
+
+jobs:
+  add-reviews:
+    name: Auto assignment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: Auto assignment
+        uses: kentaro-m/auto-assign-action@v1.1.2
+        with:
+          configuration-path: ".github/assignee.yml"
+```          
