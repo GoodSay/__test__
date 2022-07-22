@@ -37,10 +37,10 @@ jobs:
         run: |
           if [[ '${{steps.ping2.outputs.status}}' != 'OK' ]]; then
             echo ERROR!
-            echo "::set-output name=status::$(echo error)"
+            echo "::set-output name=dd::$(echo error)"
           else
             echo OK!
-            echo "::set-output name=status::$(echo ok)"
+            echo "::set-output name=dd::$(echo ok)"
           fi
           
       - name: Send alert in telegram
