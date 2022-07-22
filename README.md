@@ -7,7 +7,14 @@
 - [Deploy](#deploy)
 - [Test pytest](#pytest)
 - [Test unittest](#unittest)
-
+- [Pull request verify labels](#pull-request-verify-labels)
+- [Auto release drafter](#auto-release-drafter)
+- [Pull request auto label](#pull-request-auto-label)
+- [Pull request reviewers](#pull-request-reviewers)
+- [Pull request auto merge](#pull-request-auto-merge)
+- [Pull request auto approve](#pull-request-auto-approve)
+- [Auto release drafter 2](#auto-release-drafter-2)
+- [Badges](#badges)
 
 ## CodeQL
 
