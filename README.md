@@ -23,33 +23,7 @@
 | - | - | - |
 | bug | Something isn't working | B60205 |
 | dependencies | Pull requests that update a dependency file | BFDADC |
-| duplicate | This issue or pull request already exists | A7A8C9 |
-| enhancement | New feature or request | C2E0C6 |
-| help | Extra attention is needed | FEF2C0 |
-| invalid | This doesn't seem right | F9D0C4 |
-| question | Further information is requested | BFD4F2 |
-| wontfix | This will not be worked on | D4C5F9 |
-| automatization | None | 18D3E0 |
-| check | None | 05737A |
-| review | None | F734C6 |
-| code | None | 182110 |
-| approved | None | 0E8A16 |
-| work | None | C5455F |
-| main | None | 9BEA01 |
-| feature | New feature or request | 9BEA01 |
-| build | None | 9BEA01 |
-| common | None | 9BEA01 |
-| major | None | 000000 |
-| minor | None | 000000 |
-| refactoring | None | 176CA3 |
-| fix | some correction | F2332B |
-| patch | None | F2332B |
-| config | Improvements or additions to configuration files | 0052CC |
-| documentation | Improvements or additions to documentation | 5CB4E5 |
-| docs | None | 5CB4E5 |
-| bugfix | None | FBCA04 |
-| hotfix | some fast correction | FBCA04 |
-| test | Improvements or additions to test files | 5319E7 |
+
 
 ## CodeQL
 
