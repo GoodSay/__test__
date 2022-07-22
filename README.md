@@ -20,9 +20,9 @@
 
 ## Pull Requests labels:
 
-|1|1|
+|name|description|
 |-|-|
-|2|2|
+| bug | Something isn't working |
 |2|2|
 |2|2|
 
