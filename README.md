@@ -354,7 +354,7 @@ jobs:
 - Checkout source repository: `actions/checkout@v3`
 - Verify type labels: `zwaldowski/match-label-action@v2`
 
-`.github/workflows/verify-type-labels.yml`
+**default-file-name:** `.github/workflows/verify-type-labels.yml`
 
 ```
 name: Verify type labels
@@ -377,7 +377,7 @@ jobs:
 - Checkout source repository: `actions/checkout@v3`
 - Update draft release: `release-drafter/release-drafter@v5`
 
-`.github/workflows/release-draft.yml`
+**default-file-name:** `.github/workflows/release-draft.yml`
 
 ```
 name: Create draft release
@@ -398,7 +398,7 @@ jobs:
 ```
 
 
-`.github/release-drafter.yml`
+**default-file-name:** `.github/release-drafter.yml`
 
 ```yml
 name-template: 'v$NEXT_PATCH_VERSION'
