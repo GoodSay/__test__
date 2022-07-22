@@ -658,7 +658,7 @@ categories:
   - title: 'Features'
     labels:
       - 'feature'
-      - 'type:common'
+      - 'common'
   - title: 'Bug Fixes'
     labels:
       - 'fix'
