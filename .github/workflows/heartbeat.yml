@@ -15,7 +15,7 @@ jobs:
       - name: Curl actuator
         id: ping
         run: |
-          echo "::set-output name=status::$(curl --connect-timeout 5 --max-time 5 ${{secrets.HOST}}/api/actuator/health)"
+          echo "::set-output name=status::$(curl --connect-timeout 10 --max-time 10 google.com)"
       - name: Health check
         run: |
           if [[ ${{ steps.ping.outputs.status }} != *"UP"* ]]; then
@@ -31,6 +31,6 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             Health check of the:
-            ${{secrets.SERVER_HOST}}/api/health
+            ${{secrets.HOST}}/api/health
             failed with the result:
             ${{ steps.ping.outputs.status }}
