@@ -21,7 +21,7 @@ jobs:
       - name: Health check
         id: w1
         run: |
-          if [[ ${{ steps.ping.outputs.status }} != OK ]]; then
+          if [[ ${{ steps.ping1.outputs.status }} != OK ]]; then
             echo "::set-output name=status::$(echo error)"
             exit 1
           fi
@@ -37,4 +37,4 @@ jobs:
             Heartbeat 💗:
             ${{secrets.HOST}}/api/health
             failed with the result:
-            ${{ steps.ping.outputs.status }}
+            ${{ steps.w1.outputs.status }}
