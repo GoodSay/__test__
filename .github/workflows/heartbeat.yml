@@ -17,31 +17,25 @@ jobs:
         id: ping1
         run: |
           echo "::set-output name=status::$(curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5000/api/health)"
-          
-      - name: Curl actuator
-        id: ping2
-        run: |
-          echo "::set-output name=status::$(curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5005/api/health)"
-          
-      - name: Health check
-        id: w1
-        run: |
           if [[ ${{ steps.ping1.outputs.status }} != OK ]]; then
             echo "::set-output name=dd::$(echo error)"
           else
           echo "::set-output name=dd::$(echo ok)"
           fi
           
-      - name: Health check
-        id: w2
+      - name: Curl actuator
+        id: ping2
         run: |
+          echo "::set-output name=status::$(curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5005/api/health)"
           if [[ '${{steps.ping2.outputs.status}}' != 'OK' ]]; then
             echo ERROR!
-            echo "::set-output name=dd::$(error)"
+            echo "::set-output name=dd::$(echo error)"
           else
             echo OK!
-            echo "::set-output name=dd::$(ok)"
+            echo "::set-output name=dd::$(echo ok)"
           fi
+
+          
           
       - name: Send alert in telegram
         uses: appleboy/telegram-action@master
@@ -50,6 +44,6 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             Heartbeat 💗
-            51.210.128.134:5000/api/health | ${{ steps.w1.outputs.dd }}
-            51.210.128.134:5005/api/health | ${{ steps.w2.outputs.dd }}
+            51.210.128.134:5000/api/health | ${{ steps.ping1.outputs.dd }}
+            51.210.128.134:5005/api/health | ${{ steps.ping2.outputs.dd }}
             
