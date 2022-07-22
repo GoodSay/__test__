@@ -1,0 +1,12 @@
+addReviewers: true
+numberOfReviewers: 1
+reviewers:
+ - Zvezdolom
+
+addAssignees: true
+assignees:
+ - Zvezdolom
+numberOfAssignees: 1
+
+skipKeywords:
+  - draft
