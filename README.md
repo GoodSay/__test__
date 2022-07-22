@@ -795,7 +795,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             Health check of the:
-            ${{secrets.SERVER_HOST}}/api/actuator/health
+            ${{secrets.SERVER_HOST}}/api/health
             failed with the result:
             ${{ steps.ping.outputs.status }}
 ```
