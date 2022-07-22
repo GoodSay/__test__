@@ -655,46 +655,76 @@ name-template: '$RESOLVED_VERSION'
 tag-template: '$RESOLVED_VERSION'
 
 categories:
-  - title: 'Features'
+  - title: 'New Features'
     labels:
+      - 'main'
+      - 'major'
       - 'feature'
       - 'common'
-  - title: 'Bug Fixes'
-    labels:
-      - 'fix'
-      - 'bugfix'
-      - 'bug'
-      - 'hotfix'
-      - 'dependencies'
-  - title: 'Maintenance'
+      - 'minor'
+  - title: 'Build and refactoring'
     labels:
       - 'build'
       - 'refactoring'
+  - title: 'Hot Fixes'
+    labels:
+      - 'hotfix'
+  - title: 'Bugs Fixes'
+    labels:
+      - 'bug'
+      - 'fix'
+      - 'bugfix'
+  - title: 'Patches'
+    labels:
+      - 'patch'
+  - title: 'Documentation'
+    labels:
+      - 'config'
+      - 'documentation'
       - 'docs'
-      - 'tests'
+  - title: 'Configuration'
+    labels:
+      - 'dependencies'
+  - title: 'Tests'
+    labels:
+      - 'test'
+  - title: 'Maintenance'
+    labels:
+      - 'automatization'
+      - 'code'
+      - 'work'
+      - 'enhancement'
 
 change-title-escapes: '\<*_&'
 
 version-resolver:
   major:
     labels:
-      - major
+      - main
+      - build
       - refactoring
+      - major
   minor:
     labels:
+      - dependencies
       - feature
-      - minor
       - common
+      - minor
   patch:
     labels:
-      - patch
-      - build
+      - automatization
+      - code
+      - work
+      - enhancement
       - bug
+      - fix
+      - patch
+      - config
+      - documentation
+      - docs
       - bugfix
       - hotfix
-      - fix
-      - docs
-      - tests
+      - test
   default: patch
 ```
 
