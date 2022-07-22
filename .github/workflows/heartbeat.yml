@@ -46,6 +46,6 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             Heartbeat 💗
-            51.210.128.134:5000/api/health | ${{ steps.w1.outputs.status }}
-            51.210.128.134:5005/api/health | ${{ steps.w2.outputs.status }}
+            51.210.128.134:5000/api/health | ${{ steps.ping1.outputs.status }}
+            51.210.128.134:5005/api/health | ${{ steps.ping2.outputs.status }}
             
