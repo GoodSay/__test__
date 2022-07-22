@@ -20,7 +20,7 @@
 
 ## Pull Requests labels:
 | name | description | color |
-| - | - | - |
+|-|-|-|
 | bug | `Something isn't working` | `#B60205` |
 | dependencies | `Pull requests that update a dependency file` | `#BFDADC` |
 | duplicate | `This issue or pull request already exists` | `#A7A8C9` |
