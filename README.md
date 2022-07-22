@@ -7,6 +7,7 @@
 - [Deploy](#deploy)
 - [Test pytest](#pytest)
 - [Test unittest](#unittest)
+- [Release management](#release-management)
 
 ## CodeQL
 
