@@ -13,12 +13,27 @@ jobs:
       - name: Checkout source repository
         uses: actions/checkout@v3
         
-      - name: Curl actuator
+      - name: Curl
         id: ping
         run: |
           echo "::set-output name=status1::$(curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5000/api/health)"
           echo "::set-output name=status2::$(curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5005/api/health)"
+      
+      - name: Check
+        id: check
+        run: |
+          if [[ '${{steps.ping.outputs.status1}}' != 'OK' ]]; then
+            echo "::set-output name=status1::$(echo error)"
+          else
+            echo "::set-output name=status1::$(echo ok)"
+          fi
           
+          if [[ '${{steps.ping.outputs.status2}}' != 'OK' ]]; then
+            echo "::set-output name=status2::$(echo error)"
+          else
+            echo "::set-output name=status2::$(echo ok)"
+          fi
+      
       - name: Send alert in telegram
         uses: appleboy/telegram-action@master
         with:
@@ -26,5 +41,5 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             Heartbeat 💗
-            51.210.128.134:5000/api/health | ${{ steps.ping.outputs.status1 }}
-            51.210.128.134:5005/api/health | ${{ steps.ping.outputs.status2 }}
+            51.210.128.134:5000/api/health | ${{ steps.check.outputs.status1 }}
+            51.210.128.134:5005/api/health | ${{ steps.check.outputs.status2 }}
