@@ -626,7 +626,7 @@ jobs:
     steps:
       - name: Checkout source repository
         uses: actions/checkout@v3
-	  - name: Update release draft
+      - name: Update release draft
         uses: release-drafter/release-drafter@v5
         with:
           publish: true
