@@ -1,8 +1,4 @@
-|1|2|
-|-|-|
-|1|2|
-
-# github-actions-examples 7
+# github-actions-examples
 - [CodeQL](#codeql)
 - [Flake8](#flake8)
 - [Build and test](#build-and-test)
