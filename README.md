@@ -395,7 +395,7 @@ jobs:
       - name: Verify type labels
         uses: zwaldowski/match-label-action@v2
         with:
-          allowed: 'config, documentation, features, fix, hotfix, test'
+          allowed: 'config, documentation, feature, fix, hotfix, test'
 ```
 
 ## Auto release drafter
