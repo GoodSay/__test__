@@ -7,7 +7,7 @@
 - [Deploy](#deploy)
 - [Test pytest](#pytest)
 - [Test unittest](#unittest)
-- [Release management](#release-management)
+
 
 ## CodeQL
 
@@ -365,7 +365,7 @@ jobs:
           python -m unittest discover tests/ '*_test.py'
 ```
 
-## Release management
+## Pull request verify labels
 
 **uses:**
 - Checkout source repository: `actions/checkout@v3`
@@ -388,6 +388,8 @@ jobs:
         with:
           allowed: 'config, documentation, features, fix, hotfix, test'
 ```
+
+## Auto release drafter
 
 **uses:**
 - Checkout source repository: `actions/checkout@v3`
@@ -530,3 +532,78 @@ jobs:
         with:
           configuration-path: ".github/assignee.yml"
 ```          
+
+## Pull request auto merge
+
+**uses:**
+- **Checkout source repository:** `actions/checkout@v3`
+- **Automerge:** `pascalgn/automerge-action@v0.12.0`
+
+**default-file-name:** `.github/workflows/auto_merge.yml`
+```yml
+name: Auto merge
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - opened
+      - edited
+      - ready_for_review
+      - reopened
+      - unlocked
+  pull_request_review:
+    types:
+      - submitted
+  check_suite:
+    types:
+      - completed
+  status: {}
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: 'Auto merge'
+        uses: "pascalgn/automerge-action@v0.12.0"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_METHOD: 'merge'
+          MERGE_LABELS: "approved,!work"
+          MERGE_REMOVE_LABELS: "approved"
+          MERGE_COMMIT_MESSAGE: ""
+          MERGE_RETRIES: "6"
+          MERGE_RETRY_SLEEP: "10000"
+          UPDATE_LABELS: ""
+          UPDATE_METHOD: "merge"
+          MERGE_DELETE_BRANCH: false
+```
+		  
+## Pull request auto approve
+
+**uses:**
+- **Checkout source repository:** `actions/checkout@v3`
+- **Label when approved:** `pullreminders/label-when-approved-action@master`
+
+**default-file-name:** `.github/workflows/auto_approve.yml`
+```yml
+on: pull_request_review
+name: 'Label approved pull requests'
+jobs:
+  labelWhenApproved:
+    name: 'Label when approved'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: 'Label when approved'
+        uses: pullreminders/label-when-approved-action@master
+        env:
+          APPROVALS: "1"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ADD_LABEL: "approved"
+          REMOVE_LABEL: "awaiting review"
+```
+
