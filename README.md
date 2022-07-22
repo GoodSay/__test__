@@ -19,9 +19,10 @@
 - [Health check](#health-check)
 
 ## Pull Requests labels:
+
 |name|description|color|
 |-|-|-|
-|bug|Something isn't working|#B60205|
+|bug|Something isn't working|B60205|
 
 
 ## CodeQL
