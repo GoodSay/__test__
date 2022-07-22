@@ -722,3 +722,78 @@ jobs:
           message: World
           color: orange
 ```
+
+## Telegram alert
+
+**uses:**
+- Checkout source repository: `actions/checkout@v3`
+- Send alert in telegram: `appleboy/telegram-action@master`
+
+**default-file-name:** `.github/workflows/telegram-alert.yml`
+```yml
+name: Telegram alert
+on:
+  pull_request:
+    branches:    
+      - 'master'
+      - 'dev'
+jobs:
+  telegram:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: Send alert in telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            message
+```
+
+## Health check
+
+**uses:**
+- Checkout source repository: `actions/checkout@v3`
+- Send alert in telegram: `appleboy/telegram-action@master`
+
+**default-file-name:** `.github/workflows/health-check.yml`
+```yml
+name: Health check
+on:
+  pull_request:
+    branches:    
+      - 'master'
+      - 'dev'
+  schedule:
+    - cron: '30 * * * *'
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: Curl actuator
+        id: ping
+        run: |
+          echo "::set-output name=status::$(curl ${{secrets.SERVER_HOST}}/api/actuator/health)"
+      - name: Health check
+        run: |
+          if [[ ${{ steps.ping.outputs.status }} != *"UP"* ]]; then
+            echo "health check is failed"
+            exit 1
+          fi
+          echo "It's OK"       
+      - name: Send alert in telegram
+        if: ${{ failure() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Health check of the:
+            ${{secrets.SERVER_HOST}}/api/actuator/health
+            failed with the result:
+            ${{ steps.ping.outputs.status }}
+```
