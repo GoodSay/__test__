@@ -33,7 +33,7 @@ jobs:
       - name: Health check
         id: w2
         run: |
-          if [[ ${{ steps.ping1.outputs.status }} != OK ]]; then
+          if [[ ${{ steps.ping2.outputs.status }} != OK ]]; then
             echo "::set-output name=status::$(echo error)"
             exit 1
           fi
