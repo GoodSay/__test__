@@ -27,7 +27,6 @@ jobs:
         run: |
           if [[ ${{ steps.ping1.outputs.status }} != OK ]]; then
             echo "::set-output name=status::$(echo error)"
-            exit 1
           fi
           echo "::set-output name=status::$(echo ok)"
       - name: Health check
@@ -35,7 +34,6 @@ jobs:
         run: |
           if [[ ${{ steps.ping2.outputs.status }} != OK ]]; then
             echo "::set-output name=status::$(echo error)"
-            exit 1
           fi
           echo "::set-output name=status::$(echo ok)"
           
