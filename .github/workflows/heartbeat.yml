@@ -2,7 +2,7 @@ name: heartbeat
 on:
   pull_request:
     branches:    
-      - 'master'
+      - 'main'
       - 'dev'
   schedule:
     - cron: '*/5 * * * *'
