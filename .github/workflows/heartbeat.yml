@@ -27,9 +27,9 @@ jobs:
         id: w1
         run: |
           if [[ ${{ steps.ping1.outputs.status }} != OK ]]; then
-            echo "::set-output name=status::$(echo error)"
+            echo "::set-output name=dd::$(echo error)"
           fi
-          echo "::set-output name=status::$(echo ok)"
+          echo "::set-output name=dd::$(echo ok)"
           
       - name: Health check
         id: w2
@@ -46,6 +46,6 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             Heartbeat 💗
-            51.210.128.134:5000/api/health | ${{ steps.ping1.outputs.status }}
-            51.210.128.134:5005/api/health | ${{ steps.ping2.outputs.status }}
+            51.210.128.134:5000/api/health | ${{ steps.w1.outputs.dd }}
+            51.210.128.134:5005/api/health | ${{ steps.w2.outputs.dd }}
             
