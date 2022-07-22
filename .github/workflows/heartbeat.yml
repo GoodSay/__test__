@@ -16,8 +16,10 @@ jobs:
       - name: Curl
         id: ping
         run: |
-          echo "::set-output name=status1::$(curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5000/api/health)"
-          echo "::set-output name=status2::$(curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5005/api/health)"
+          echo "::set-output name=status1::$(curl --connect-timeout 5 --max-time 5 http://51.210.128.134:5000/api/health)"
+          echo "::set-output name=status2::$(curl --connect-timeout 5 --max-time 5 http://51.210.128.134:5005/api/health)"
+          echo "::set-output name=status3::$(curl --connect-timeout 5 --max-time 5 http://51.210.128.134:5015/api/health)"
+          echo "::set-output name=status4::$(curl --connect-timeout 5 --max-time 5 http://51.210.128.134:5025/api/health)"
       
       - name: Check
         id: check
@@ -33,6 +35,18 @@ jobs:
           else
             echo "::set-output name=status2::$(echo ok)"
           fi
+          
+          if [[ '${{steps.ping.outputs.status3}}' != 'OK' ]]; then
+            echo "::set-output name=status3::$(echo error)"
+          else
+            echo "::set-output name=status3::$(echo ok)"
+          fi
+          
+          if [[ '${{steps.ping.outputs.status4}}' != 'OK' ]]; then
+            echo "::set-output name=status4::$(echo error)"
+          else
+            echo "::set-output name=status4::$(echo ok)"
+          fi
       
       - name: Send alert in telegram
         uses: appleboy/telegram-action@master
@@ -43,3 +57,5 @@ jobs:
             Heartbeat 💗
             51.210.128.134:5000/api/health | ${{ steps.check.outputs.status1 }}
             51.210.128.134:5005/api/health | ${{ steps.check.outputs.status2 }}
+            51.210.128.134:5015/api/health | ${{ steps.check.outputs.status3 }}
+            51.210.128.134:5025/api/health | ${{ steps.check.outputs.status4 }}
