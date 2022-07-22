@@ -17,9 +17,21 @@ jobs:
         id: ping1
         run: |
           echo "::set-output name=status::$(curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5000/api/health)"
+      - name: Curl actuator
+        id: ping2
+        run: |
+          echo "::set-output name=status::$(curl --connect-timeout 10 --max-time 10 http://51.210.128.134:5000/api/health)"
           
       - name: Health check
         id: w1
+        run: |
+          if [[ ${{ steps.ping1.outputs.status }} != OK ]]; then
+            echo "::set-output name=status::$(echo error)"
+            exit 1
+          fi
+          echo "::set-output name=status::$(echo ok)"
+      - name: Health check
+        id: w2
         run: |
           if [[ ${{ steps.ping1.outputs.status }} != OK ]]; then
             echo "::set-output name=status::$(echo error)"
@@ -33,7 +45,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            Heartbeat 💗:
-            ${{secrets.HOST}}/api/health
-            failed with the result:
-            ${{ steps.w1.outputs.status }}
+            Heartbeat 💗
+            51.210.128.134:5000/api/health | ${{ steps.w1.outputs.status }}
+            51.210.128.134:5005/api/health | ${{ steps.w2.outputs.status }}
+            
