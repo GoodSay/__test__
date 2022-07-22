@@ -428,7 +428,7 @@ template: |
   $CHANGES
 ```
 
-`.github/labeler.yml`
+**default-file-name:** `.github/labeler.yml`
 ```yml
 # Add 'repo' label to any root file changes
 repo:
@@ -452,12 +452,15 @@ frontend:
   all: ['!src/main.js']
 ```
 
-`.github/workflows/labeler.yml`
+**uses:**
+- Checkout source repository: `actions/checkout@v3`
+- Pull Request Labeler: `actions/labeler@v4`
+
+**default-file-name:** `.github/workflows/labeler.yml`
 ```yml
-name: "Pull Request Labeler"
+name: Pull Request Labeler
 on:
 - pull_request_target
-
 jobs:
   triage:
     permissions:
@@ -465,7 +468,10 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/labeler@v4
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+      - name: Pull Request Labeler
+        uses: actions/labeler@v4
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
