@@ -385,7 +385,7 @@ name: Create draft release
 on:
   push:
     branches:
-      - main
+      - 'branch'
 jobs:
   Update draft release:
     runs-on: ubuntu-latest
