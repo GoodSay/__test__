@@ -271,13 +271,6 @@ jobs:
 **uses:**
 - Executing remote ssh commands using ssh key: `appleboy/ssh-action@master`
 
-**params:**
-- host (ip address)
-- username (user)
-- key (ssh-key)
-- port (default: 22)
-- script (bash command)
-
 **default-file-name:** `.github/workflows/remote-ssh.yml`
 ```yml
 name: Remote SSH commands
@@ -310,11 +303,6 @@ jobs:
 **uses:**
 - Checkout source repository: `actions/checkout@v3`
 - Install SSH key: `shimataro/ssh-key-action@v2`
-
-**params:**
-- host (ip address)
-- username (user)
-- key (ssh-key)
 
 **default-file-name:** `.github/workflows/deploy.yml`
 ```yml
